@@ -1,0 +1,220 @@
+
+<html>
+
+<head>
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" type="text/css">
+	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css" type="text/css">
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js" type="text/javascript">
+	</script>
+	<style type="text/css">
+		body {
+			text-align: center;
+		}
+	</style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>
+		bilibili经验值计算工具
+	</title>
+</head>
+
+<body>
+	<h3>
+		<img src="https://i0.hdslb.com/bfs/activity-plat/cover/20170614/x65z8xpm2z.png" style="width: 100"/>
+		经验值计算工具 V1.0
+	</h3>
+	<p>
+		功能：<br>
+		①计算如果每天都投5个硬币 离到达目标经验要几天<br>
+		②计算如果离到达目标经验需要几天<br>
+		注意：本算法的天数是你每天登录并完成4项每日任务的数量<br>
+		本版本将会在硬币数为0时计算终止 或在到达目标经验时停止<br>
+		<br>
+		第一次做前端 UI比较垃圾 等我有时间再搞吧
+	</p>
+	<h4>
+            计算参数
+    </h4>
+    <p>
+		经验值
+	</p>
+	<form action="#">
+		<div class="mdl-textfield mdl-js-textfield">
+			<input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="now_xp">
+			<label class="mdl-textfield__label" for="sample2">xp</label> <span class="mdl-textfield__error">Input is not a number!</span>
+		</div>
+	</form>
+	<p>
+		硬币数
+	</p>
+	<form action="#">
+		<div class="mdl-textfield mdl-js-textfield">
+			<input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="now_coin">
+			<label class="mdl-textfield__label" for="sample2">coin</label> <span class="mdl-textfield__error">Input is not a number!</span>
+		</div>
+	</form>
+	<p>
+		目标经验
+	</p>
+	<form action="#">
+		<div class="mdl-textfield mdl-js-textfield">
+			<input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="target_xp">
+			<label class="mdl-textfield__label" for="sample2">target xp</label> <span class="mdl-textfield__error">Input is not a number!</span>
+		</div>
+	</form>
+	<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="start()">计算</button>
+	<p>
+		<br>
+		<br>
+	</p>
+	
+	<h4>
+            计算结果
+        </h4>
+	<p id="result">
+		计算终止原因：null<br>
+		经验值：null<br>
+		剩余硬币数：null<br>
+		登录天数：null
+	</p>
+	<p>
+		<br>
+		<br>
+	</p>
+
+	<h4>
+		相关链接
+	</h4>
+	<p>
+		B站帮助中心：<br>
+		<a href="https://www.bilibili.com/blackboard/help.html" target="_blank">https://www.bilibili.com/blackboard/help.html</a><br>
+		B站个人中心：<br>
+		<a href="https://account.bilibili.com/site/home.html" target="_blank">https://account.bilibili.com/site/home.html</a><br>
+		工具用法&amp;原理：<br>
+		
+	</p>
+
+	<p>
+		<br>
+		<br>
+		<br>
+	</p>
+	<p style="margin-bottom: 1px;">
+		By wxx
+	</p>
+	<button class="mdl-button mdl-js-button mdl-js-ripple-effect" style="text-transform: none">
+	 	https://github.com/wangxuxin
+	</button>
+	<script type="text/javascript">
+		//document.getElementById("demo").innerHTML = "段落已修改。";
+		var now_xp;
+		var now_coin;
+		var target_xp;
+		var result_reason=0;
+		var result_xp;
+		var result_coin;
+		var result_days;
+		var result_reason_string;
+
+		function start() {
+			now_xp=parseInt(document.getElementById("now_xp").value);
+			now_coin=parseInt(document.getElementById("now_coin").value);
+			target_xp=parseInt(document.getElementById("target_xp").value);
+			if(isNaN(now_xp)||isNaN(now_coin)||isNaN(target_xp)){
+				result_reason=99
+			}else{
+				result_reason=0
+			}
+			result_xp=now_xp;
+			result_coin=now_coin;
+
+			for (result_days = 1; cancount(1); result_days++) {
+				result_coin++
+				addxp(15,1);
+				for (var i = 1; i <= 5; i++) {
+					addxp(10,2);
+				}
+			}
+			lastcount();
+			document.getElementById("result").innerHTML = "计算终止原因："+result_reason_string+"<br>\
+															经验值："+result_xp+"<br>\
+															剩余硬币数："+result_coin+"<br>\
+															登录天数："+result_days;
+		}
+		
+		function cancount(state){
+			if(result_reason!=0){
+				return false
+			}
+			if(state=1){
+				if (result_xp >= target_xp ) {
+					result_reason=11;
+					return false;
+				}
+				if (result_coin < 1) {
+					result_reason=12;
+					return false;
+				}
+			}
+			if(state=2){
+				if (result_xp >= target_xp ) {
+					result_reason=21;
+					return false;
+				}
+				if (result_coin < 1) {
+					result_reason=22;
+					return false;
+				}
+			}
+			return true;
+		}
+		function addxp(xp, mode){
+			debug();
+			if(!cancount(2)){
+				return false;
+			}
+			if (mode==2) {
+				result_coin--;
+			}
+			result_xp+=xp;
+		}
+		function lastcount(){
+			switch(result_reason){
+				case 11:
+				result_reason_string="已达到目标经验"
+				break;
+
+				case 12:
+				result_reason_string="硬币不足"
+				break;
+
+				case 21:
+				result_reason_string="已达到目标经验"
+				break;
+
+				case 22:
+				result_reason_string="硬币不足"
+				break;
+
+				case 99:
+				result_reason_string="输入框中不能为空"
+				break;
+
+				default:
+				result_reason_string="未知错误:"+result_reason
+			}
+		}
+		function debug(){
+			console.log("day:"+result_days+"\
+							coin:"+result_coin+"\
+							xp:"+result_xp)
+		}
+		function myrefresh() {
+			window.location.reload();
+		}
+		//setTimeout('myrefresh()',500); //指定1秒刷新一次
+	</script>
+</body>
+
+</html>

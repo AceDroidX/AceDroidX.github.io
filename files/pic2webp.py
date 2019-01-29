@@ -95,4 +95,4 @@ def cmd(root, pic, webp):
 
 if __name__ == "__main__":
     # 在此输入需要转换的目录
-    pic2webp(r"F:\屏幕快照整理\屏幕快照170127-170809")
+    pic2webp(r"/mnt/h/扫描")

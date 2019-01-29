@@ -1,14 +1,12 @@
 <html>
-<html class="mdc-typography">
-
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC" type="text/css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" type="text/css">
-    <link rel="stylesheet" href="./mdl/material.blue-pink.min.css" />
-    <script defer src="./mdl/material.min.js" type="text/javascript">
-    </script>
-
+    <title>
+        AceDroidX's Tools
+    </title>
+    <link href="./v-mdl/icon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118704626-1"></script>
     <script>
@@ -21,135 +19,114 @@
 
         gtag('config', 'UA-118704626-1');
     </script>
-
     <style>
-        .html{
+        .html {
             font-family: Noto Sans SC;
         }
-        .mdl-card {
+
+        .v-card {
             width: fit-content;
             margin-left: auto;
             margin-right: auto;
-            font-family: Noto Sans SC;
-        }
-        .material-icons {
-            margin: 10
-        }
-        .mdl-textfield {
-            width: fit-content;
+            margin-bottom: 10px;
         }
     </style>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        AceDroidX's Tools
-    </title>
 </head>
 
 <body>
-    <script type="text/javascript">
-        var w = getQueryVariable("w");
-        var a = getQueryVariable("a");
-        var isdebug = getQueryVariable("isdebug");
-
-        function getQueryVariable(variable) {
-            var query = window.location.search.substring(1);
-            var vars = query.split("&");
-            for (var i = 0; i < vars.length; i++) {
-                var pair = vars[i].split("=");
-                if (pair[0] == variable) {
-                    return pair[1];
+    <div id="app" class="hide-overflow" style="position: relative;height: 100%;">
+        <v-navigation-drawer v-model="drawer" absolute temporary>
+            <v-list>
+                <v-list-tile avatar onclick="window.location.href='https://AceDroidX.github.io/?f=gp'">
+                    <v-list-tile-avatar>
+                        <img src="https://avatars.githubusercontent.com/u/15519693?s=100">
+                    </v-list-tile-avatar>
+                    <v-list-tile-content>
+                        <v-list-tile-title>AceDroidX</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+            </v-list>
+            <v-list dense>
+                <v-divider></v-divider>
+                <v-list-tile v-for="item in items" :key="item.id" @click=itemclick(item.id)>
+                    <v-list-tile-action>
+                        <v-icon>{{ item.icon }}</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+            </v-list>
+        </v-navigation-drawer>
+        <v-toolbar absolute scroll-off-screen scroll-target="#scrolling-techniques">
+            <v-toolbar-side-icon v-on:click.stop="drawer = !drawer"></v-toolbar-side-icon>
+            <v-toolbar-title>AceDroidX's Tools</v-toolbar-title>
+            <!-- <v-spacer></v-spacer>
+                <v-toolbar-items class="hidden-sm-and-down">
+                    <v-btn flat>Link One</v-btn>
+                    <v-btn flat>Link Two</v-btn>
+                    <v-btn flat>Link Three</v-btn>
+                </v-toolbar-items> -->
+        </v-toolbar>
+        <div id="scrolling-techniques" class="scroll-y" style="max-height: 100%;">
+            <div style="margin:100px"></div>
+            <v-layout column>
+                <v-card v-for="card in cards" v-bind:key=card.id>
+                    <v-card-title primary-title>
+                        <div>
+                            <div class="headline">{{card.title}}</div>
+                            <v-text-field v-bind:label=card.text v-model=card.input v-on:keyup=keyup(card.id)></v-text-field>
+                        </div>
+                    </v-card-title>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn flat v-on:click=click(card.id)>GO</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-layout>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                drawer: null,
+                items: [
+                    { id: 0, title: 'Home', icon: 'dashboard', link: "https://AceDroidX.github.io/?f=gp" },
+                    { id: 1, title: 'About', icon: 'question_answer', link: "https://AceDroidX.github.io/about?f=gp" }
+                ],
+                cards: [
+                    { id: 0, title: "bilibili视频av号跳转", text: "输入av号", input: "" },
+                    { id: 1, title: "pixiv图片id跳转", text: "输入图片id", input: "" },
+                    { id: 2, title: "pixiv画师id跳转", text: "输入画师id", input: "" }
+                ]
+            },
+            methods: {
+                click: function (id) {
+                    var input = this.cards[id].input
+                    var flink
+                    if (id == 0) {
+                        flink = "https://www.bilibili.com/video/av"
+                        input = input.replace(/av/i, "")
+                    } else if (id == 1) {
+                        flink = "https://www.pixiv.net/member_illust.php?mode=medium&illust_id="
+                    } else if (id == 2) {
+                        flink = "http://www.pixiv.net/member.php?id="
+                    }
+                    console.log(flink + input)
+                    window.open(flink + input)
+                    this.cards[id].input = ""
+                },
+                keyup: function (id) {
+                    if (event.keyCode == 13) this.click(id)
+                },
+                itemclick: function (id) {
+                    window.open(this.items[id].link)
                 }
             }
-            return (false);
-        }
-    </script>
-
-    <div class="mdl-layout mdl-js-layout">
-        <header class="mdl-layout__header mdl-layout__header--scroll">
-            <div class="mdl-layout__header-row">
-                <!-- Title -->
-                <span class="mdl-layout-title">AceDroidX's Tools</span>
-                <!-- Add spacer, to align navigation to the right -->
-                <div class="mdl-layout-spacer"></div>
-                <!-- Navigation -->
-            </div>
-        </header>
-        <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">AceDroidX's Tools</span>
-            <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="https://github.com/AceDroidX">Github</a>
-            </nav>
-        </div>
-        <main class="mdl-layout__content">
-            <div class="page-content">
-                <div class="mdl-card mdl-shadow--2dp" style="margin-top: 50px;">
-                    <div class="mdl-card__title mdl-card--border">
-                        bilibili视频av号跳转
-                    </div>
-                    <div class="mdl-card__supporting-text" id="url" style="color: rgba(0,0,0,.87);display: inline">
-                        <form action="#">
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" id="biliav" oninput="btnOn('biliav')">
-                                <label class="mdl-textfield__label" for="sample3">输入av号</label>
-                            </div>
-                        </form>
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="biliavButton" style="display:none" onclick="btnClick('biliav')">
-                            GO!
-                        </button>
-                    </div>
-                </div>
-                <div class="mdl-card mdl-shadow--2dp" style="margin-top: 50px;">
-                    <div class="mdl-card__title mdl-card--border">
-                        pixiv图片id跳转
-                    </div>
-                    <div class="mdl-card__supporting-text" id="url" style="color: rgba(0,0,0,.87);">
-                        <form action="#">
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" id="pixivpic" oninput="btnOn('pixivpic')">
-                                <label class="mdl-textfield__label" for="sample3">输入图片id</label>
-                            </div>
-                        </form>
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="pixivpicButton" style="display:none">
-                            GO!
-                        </button>
-                    </div>
-                </div>
-                <div class="mdl-card mdl-shadow--2dp" style="margin-top: 50px;">
-                    <div class="mdl-card__title mdl-card--border">
-                        pixiv画师id跳转
-                    </div>
-                    <div class="mdl-card__supporting-text" id="url" style="color: rgba(0,0,0,.87);">
-                        <form action="#">
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" id="pixivdrawer"  oninput="btnOn('pixivdrawer')">
-                                <label class="mdl-textfield__label" for="sample3">输入画师id</label>
-                            </div>
-                        </form>
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="pixivdrawerButton" style="display:none">
-                            GO!
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <script type="text/javascript">
-        function btnOn(id){
-            element=document.getElementById(id+"Button")
-            element.style.display="";
-        }
-        function btnClick(id){
-            switch(id){
-                case "biliav":
-                console.log(document.getElementById("biliav").value)
-                window.open("https://www.bilibili.com/video/"+document.getElementById("biliav").value)
-                document.getElementById("biliav").value=""
-                break
-            }
-        }
+        })
     </script>
 </body>
-
 </html>

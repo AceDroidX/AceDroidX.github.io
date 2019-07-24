@@ -1,0 +1,146 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>
+        杭七中学生会招新
+    </title>
+    <link rel="stylesheet" href="https://AceDroidX.github.io/mdi/material-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css">
+    <!-- <link rel="stylesheet" href="./lib/DPlayer.min.css"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118704626-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-118704626-1');
+    </script>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <div id="app" class="hide-overflow" style="position: relative;height: 100%;">
+        <v-navigation-drawer v-model="drawer" absolute temporary>
+            <v-list>
+                <v-list-tile avatar onclick="window.location.href='https://AceDroidX.github.io/?f=gp'">
+                    <v-list-tile-avatar>
+                        <img src="https://avatars.githubusercontent.com/u/15519693?s=100">
+                    </v-list-tile-avatar>
+                    <v-list-tile-content>
+                        <v-list-tile-title>AceDroidX</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+            </v-list>
+            <v-list dense>
+                <v-divider></v-divider>
+                <v-list-tile v-for="item in items" :key="item.id" @click=itemclick(item.id)>
+                    <v-list-tile-action>
+                        <v-icon>{{ item.icon }}</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+            </v-list>
+        </v-navigation-drawer>
+        <i class="material-icons flodiv" v-on:click.stop="drawer = !drawer">menu</i>
+        <!-- <button class="flodiv1" v-on:click.stop="drawer = !drawer" >test</button> -->
+        <!-- <v-toolbar-side-icon v-on:click.stop="drawer = !drawer" class="flodiv1"></v-toolbar-side-icon> -->
+        <!-- <div id="dplayer"></div> -->
+        <router-view>
+        </router-view>
+    </div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 生产环境版本，优化了尺寸和速度 -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+    <!-- <script src="./lib/flv.min.js"></script>
+    <script src="./lib/DPlayer.min.js"></script> -->
+    <script>
+        const first = {
+            template: `
+            <div>
+    <div>
+        <transition-group name="fade">
+            <p v-if="show" key=1 style="font-family:STXINGKA;font-size: 50;">杭七中学生会</p>
+            <p v-if="show" key=2 style="font-family:STXINGKA;font-size: 50;">招新</p>
+            <img alt="" key=3 src="icon.png" class="max-75">
+            <p v-if="show" key=4 style="font-family:STXINGKA;font-size: 50;">点此进入</p>
+        </transition-group>
+    </div>
+    <div style="height: 50%"></div>
+    <div class="imgfs"></div>
+</div>`, computed: {
+                show: function () {
+                    return this.$route.query.show
+                }
+            }
+        }
+        const introduce = { template: `` }
+        const router = new VueRouter({
+            routes: [
+                { path: '/first', component: first },
+                { path: '/introduce', component: introduce }
+            ]
+        })
+        var app = new Vue({
+            el: '#app',
+            router,
+            data: {
+                drawer: null,
+                items: [
+                    { id: 0, title: 'Home', icon: 'dashboard', link: "https://AceDroidX.github.io/?f=gp" },
+                    { id: 1, title: 'About', icon: 'question_answer', link: "https://AceDroidX.github.io/about?f=gp" },
+                    { id: 2, title: 'filebrowser', icon: 'folder', link: "./filebrowser" },
+                    { id: 3, title: 'download', icon: 'folder', link: "./download" },
+                    { id: 4, title: 'aria2', icon: 'folder', link: "https://aria.acedroidx.top" },
+                    { id: 5, title: 'webdav', icon: 'folder', link: "./webdav" }
+                ],
+                function() {
+                    return {
+                        show: false
+                    }
+                },
+            },
+
+            mounted: function () {
+                this.$nextTick(function () {
+                    // Code that will run only after the
+                    // entire view has been rendered
+                    hash = window.location.hash
+                    if (hash == "#/") {
+                        this.$router.push = '/first';
+                        setTimeout(function () { this.$router.push('/first?show=true') }.bind(this), 2000);
+                    }
+                    else if (hash == "#/first") {
+                        setTimeout(function () { this.$router.push('/first?show=true') }.bind(this), 2000);
+                    }
+                })
+            },
+            methods: {
+                itemclick: function (id) {
+                    window.open(this.items[id].link)
+                },
+                routechange: function () {
+                    // if (this.$route.fullPath == "/first") {
+                    //     console.log('set time')
+                    //     // setTimeout(function () { this.$router.push('/main') }.bind(this), 2000);
+                    // }
+                }
+            },
+            watch: {
+                '$route': 'routechange'
+            },
+        })
+    </script>
+</body>
+
+</html>

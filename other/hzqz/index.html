@@ -6,7 +6,7 @@
         杭七中学生会招新
     </title>
     <link rel="stylesheet" href="https://AceDroidX.github.io/mdi/material-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@1.5.16/dist/vuetify.min.css">
     <!-- <link rel="stylesheet" href="./lib/DPlayer.min.css"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -53,15 +53,17 @@
         <!-- <button class="flodiv1" v-on:click.stop="drawer = !drawer" >test</button> -->
         <!-- <v-toolbar-side-icon v-on:click.stop="drawer = !drawer" class="flodiv1"></v-toolbar-side-icon> -->
         <!-- <div id="dplayer"></div> -->
-        <router-view>
-        </router-view>
+        <transition name="fade" mode="out-in">
+            <router-view>
+            </router-view>
+        </transition>
     </div>
     <!-- 开发环境版本，包含了有帮助的命令行警告 -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <!-- 生产环境版本，优化了尺寸和速度 -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@1.5.16/dist/vuetify.min.js"></script>
     <!-- <script src="./lib/flv.min.js"></script>
     <script src="./lib/DPlayer.min.js"></script> -->
     <script src="./template.js"></script>

@@ -1,12 +1,87 @@
-<div>
-    <div>
-        <transition-group name="fade">
-            <p v-if="this.$route.query.show" key=1 style="font-family:STXINGKA;font-size: 50;">杭七中学生会</p>
-            <p v-if="this.$route.query.show" key=2 style="font-family:STXINGKA;font-size: 50;">招新</p>
-            <img alt="" key=3 src="icon.png" class="max-75">
-            <p v-if="this.$route.query.show" key=4 style="font-family:STXINGKA;font-size: 50;">点此进入</p>
-        </transition-group>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>
+        杭七中学生会招新
+    </title>
+    <link rel="stylesheet" href="https://AceDroidX.github.io/mdi/material-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@1.5.16/dist/vuetify.min.css">
+    <!-- <link rel="stylesheet" href="./lib/DPlayer.min.css"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118704626-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-118704626-1');
+    </script>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <div id="app" class="hide-overflow" style="position: relative;height: 100%;">
+        <v-navigation-drawer v-model="drawer" absolute temporary>
+            <v-list>
+                <v-list-tile avatar onclick="window.location.href='https://AceDroidX.github.io/?f=gp'">
+                    <v-list-tile-avatar>
+                        <img src="https://avatars.githubusercontent.com/u/15519693?s=100">
+                    </v-list-tile-avatar>
+                    <v-list-tile-content>
+                        <v-list-tile-title>AceDroidX</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+            </v-list>
+            <v-list dense>
+                <v-divider></v-divider>
+                <v-list-tile v-for="item in items" :key="item.id" @click=itemclick(item.id)>
+                    <v-list-tile-action>
+                        <v-icon>{{ item.icon }}</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+            </v-list>
+        </v-navigation-drawer>
+        <i class="material-icons flodiv" v-on:click.stop="drawer = !drawer">menu</i>
+        <!-- <button class="flodiv1" v-on:click.stop="drawer = !drawer" >test</button> -->
+        <!-- <v-toolbar-side-icon v-on:click.stop="drawer = !drawer" class="flodiv1"></v-toolbar-side-icon> -->
+        <!-- <div id="dplayer"></div> -->
+        <transition name="fade" mode="out-in">
+            <div>
+                <div>
+                    <transition-group name="fade" mode="out-in" style="background-color: rgba(255,255,255,0.75);padding: 35px;">
+                        <p key=1 style="font-family:KAITI;font-size: 30;font-weight:bold;">学生会是什么？</p>
+                        <p key=2 style="font-family:SONGTI;font-size: 30;">是在校团委指导下全心全意为同学服务的学生组织，是学校联系广大学生的桥梁和纽带。</p>
+                        <p key=3 style="font-family:KAITI;font-size: 30;font-weight:bold;">学生会做什么？</p>
+                        <p key=4 style="font-family:SONGTI;font-size: 30;">活动策划、校际联谊、志愿服务、管理社团、卫生检查等等，方方面面贯穿整个高中生活，足迹遍布校园各个角落，以解决同学困难为己任，以建设美好校园为目标。</p>
+                        <p key=5 style="font-family:KAITI;font-size: 30;font-weight:bold;">加入学生会有什么要求？</p>
+                        <p key=6 style="font-family:SONGTI;font-size: 30;">态度为首，能力次之。有一颗愿奉献的心，有一个努力进取的态度。</p>
+                        <p key=7 style="font-family:KAITI;font-size: 30;font-weight:bold;">加入学生会有什么好处？</p>
+                        <p key=8 style="font-family:SONGTI;font-size: 30;">高中学生会充满挑战，加入学生会可以充分锻炼自身各项能力，为步入大学乃至社会打下基础，在学生会拥有一番成绩也能带来莫大的成就感，同时对于工作认真积极奉献的学生会成员，在校评优评先方面优先考虑。</p>
+                    </transition-group>
+                </div>
+                <div style="height: 50%"></div>
+                <div class="imgfs"></div>
+            </div>
+        </transition>
     </div>
-    <div style="height: 50%"></div>
-    <div class="imgfs"></div>
-</div>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 生产环境版本，优化了尺寸和速度 -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@1.5.16/dist/vuetify.min.js"></script>
+    <!-- <script src="./lib/flv.min.js"></script>
+    <script src="./lib/DPlayer.min.js"></script> -->
+    <script src="./template.js"></script>
+    <script src="./vue.app.js"></script>
+</body>
+
+</html>

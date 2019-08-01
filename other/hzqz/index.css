@@ -30,6 +30,9 @@
   background: url(b1.webp) no-repeat center center;
   background-size: cover
 }
+p.lishu{
+  font-family:LISHU;font-size: 40;
+}
 @font-face {
   font-family: STXINGKA;
   src: url(STXINGKA.TTF)

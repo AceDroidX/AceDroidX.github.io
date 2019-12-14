@@ -1,4 +1,5 @@
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>
@@ -75,7 +76,8 @@
                     <v-card-title primary-title>
                         <div>
                             <div class="headline">{{card.title}}</div>
-                            <v-text-field v-bind:label=card.text v-model=card.input v-on:keyup=keyup(card.id)></v-text-field>
+                            <v-text-field v-bind:label=card.text v-model=card.input v-on:keyup=keyup(card.id)>
+                            </v-text-field>
                         </div>
                     </v-card-title>
                     <v-card-actions>
@@ -89,6 +91,15 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@1.5.16/dist/vuetify.min.js"></script>
     <script>
+        String.prototype.format = function () {
+            //将arguments转化为数组（ES5中并非严格的数组）
+            var args = Array.prototype.slice.call(arguments);
+            var count = 0;
+            //通过正则替换%s
+            return this.replace(/%s/g, function (s, i) {
+                return args[count++];
+            });
+        }
         var app = new Vue({
             el: '#app',
             data: {
@@ -100,7 +111,8 @@
                 cards: [
                     { id: 0, title: "bilibili视频av号跳转", text: "输入av号", input: "" },
                     { id: 1, title: "pixiv图片id跳转", text: "输入图片id", input: "" },
-                    { id: 2, title: "pixiv画师id跳转", text: "输入画师id", input: "" }
+                    { id: 2, title: "pixiv画师id跳转", text: "输入画师id", input: "" },
+                    { id: 3, title: "Youtube封面获取", text: "输入视频id", input: "" }
                 ]
             },
             methods: {
@@ -108,15 +120,17 @@
                     var input = this.cards[id].input
                     var flink
                     if (id == 0) {
-                        flink = "https://www.bilibili.com/video/av"
+                        flink = "https://www.bilibili.com/video/av%s"
                         input = input.replace(/av/i, "")
                     } else if (id == 1) {
-                        flink = "https://www.pixiv.net/member_illust.php?mode=medium&illust_id="
+                        flink = "https://www.pixiv.net/member_illust.php?mode=medium&illust_id=%s"
                     } else if (id == 2) {
-                        flink = "http://www.pixiv.net/member.php?id="
+                        flink = "http://www.pixiv.net/member.php?id=%s"
+                    } else if (id == 3) {
+                        flink = "https://i1.ytimg.com/vi/%s/maxresdefault.jpg"
                     }
-                    console.log(flink + input)
-                    window.open(flink + input)
+                    console.log(flink.format(input))
+                    window.open(flink.format(input))
                     this.cards[id].input = ""
                 },
                 keyup: function (id) {
@@ -129,4 +143,5 @@
         })
     </script>
 </body>
+
 </html>

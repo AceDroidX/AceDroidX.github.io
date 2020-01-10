@@ -112,13 +112,15 @@
                     { id: 0, title: "bilibili视频av号跳转", text: "输入av号", input: "" },
                     { id: 1, title: "pixiv图片id跳转", text: "输入图片id", input: "" },
                     { id: 2, title: "pixiv画师id跳转", text: "输入画师id", input: "" },
-                    { id: 3, title: "Youtube封面获取", text: "输入视频id", input: "" }
+                    { id: 3, title: "Youtube封面获取", text: "输入视频id", input: "" },
+                    { id: 4, title: "Base64编码", text: "输入要编码的文字", input: "" },
+                    { id: 5, title: "Base64解码", text: "输入要解码的文字", input: "" }
                 ]
             },
             methods: {
                 click: function (id) {
                     var input = this.cards[id].input
-                    var flink
+                    var flink = ""
                     if (id == 0) {
                         flink = "https://www.bilibili.com/video/av%s"
                         input = input.replace(/av/i, "")
@@ -128,10 +130,16 @@
                         flink = "http://www.pixiv.net/member.php?id=%s"
                     } else if (id == 3) {
                         flink = "https://i1.ytimg.com/vi/%s/maxresdefault.jpg"
+                    } else if (id == 4) {
+                        input = btoa(input)
+                    } else if (id == 5) {
+                        input = atob(input)
                     }
-                    console.log(flink.format(input))
-                    window.open(flink.format(input))
-                    this.cards[id].input = ""
+                    if (flink != "") {
+                        console.log(flink.format(input))
+                        window.open(flink.format(input))
+                        this.cards[id].input = ""
+                    }
                 },
                 keyup: function (id) {
                     if (event.keyCode == 13) this.click(id)

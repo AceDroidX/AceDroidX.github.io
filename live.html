@@ -110,21 +110,25 @@
                 appname: 'flv',
                 streamname: null,
                 visibility: '',
-                isload: false
+                isload: false,
+                ratelimit: 0
             },
             mounted: function () {
+                if (this.$route.query.url != null) {
+                    this.url = this.$route.query.url
+                }
+                if (this.$route.query.app != null) this.appname = this.$route.query.app
+                this.streamname = this.$route.query.stream
+                if (this.streamname != null) {
+                    this.type = 'flv'
+                    this.url = this.url + '?app=' + this.appname + '&stream=' + this.streamname
+                }
+                if (this.$route.query.ratelimit != null) {
+                    this.ratelimit = parseFloat(this.$route.query.ratelimit)
+                }
                 this.$nextTick(function () {
                     // Code that will run only after the
                     // entire view has been rendered
-                    if (this.$route.query.url != null) {
-                        this.url = this.$route.query.url
-                    }
-                    if (this.$route.query.app != null) this.appname = this.$route.query.app
-                    this.streamname = this.$route.query.stream
-                    if (this.streamname != null) {
-                        this.type = 'flv'
-                        this.url = this.url+'?app=' + this.appname + '&stream=' + this.streamname
-                    }
                     this.dp = new DPlayer({
                         container: document.getElementById('dplayer'),
                         live: false,
@@ -156,7 +160,20 @@
                     });
                     setTimeout(() => { this.visibility = 'visibility: hidden;' }, 3000)
                     this.isload = true
-                    setTimeout(() => { this.dp.play() }, 3000)
+                    if (this.ratelimit != 0) {//建议为2
+                        setInterval(() => {
+                            if (app.dp.video.buffered.length == 0) return
+                            //console.log(this.dp.video.buffered.end(0) - this.dp.video.currentTime)
+                            if (this.dp.video.buffered.end(0) - this.dp.video.currentTime > this.ratelimit + 1) {
+                                this.dp.video.playbackRate = 1.2
+                                //console.log('rate:1.2')
+                            }
+                            if (this.dp.video.buffered.end(0) - this.dp.video.currentTime <= this.ratelimit) {
+                                this.dp.video.playbackRate = 1
+                                //console.log('rate:1')
+                            }
+                        }, 100)
+                    }
                 })
             },
             methods: {

@@ -135,6 +135,7 @@ http {
     }
 }
 ```
+
 #### 其他参考文章：  
 同是Noripro转播组组员@A1ex_inamin 写的在LNMP环境下的配置：  
 <https://a1ex.pw/2020/03/03/%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%AF%B9YouTube%E4%BD%8E%E5%BB%B6%E8%BF%9F%E7%9A%84%E7%BC%93%E5%86%B2%E4%BB%A5%E6%96%B9%E4%BE%BF%E8%BD%AC%E6%92%AD>  

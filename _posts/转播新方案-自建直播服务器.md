@@ -1,3 +1,4 @@
+# 转播新方案-自建直播服务器
 # 前言：
 我是Noripro转播组里一位~~不会整活~~的转播man，最近实验了一种新型转播方式，效果不错，遂与各位分享。  
 犬山的直播设置是Ultra Low Latency，只有2-3秒的延迟，也就是只有2-3秒的缓冲时间，而且并不能在直播时实时回放，这就对转播man的网络质量有了极高的要求。这个月组内的转播man各种转圈，更加神必的是，连在日本的朋友也会卡顿，于是我从另一方向思考，能否通过增加缓冲时间(Buffer)保证直播的稳定性。  
@@ -134,7 +135,7 @@ http {
 }
 ```
 #### 其他参考文章：  
-**同是Noripro转播组组员@A1ex_inamin 写的在LNMP环境下的配置：**  
+同是Noripro转播组组员@A1ex_inamin 写的在LNMP环境下的配置：  
 <https://a1ex.pw/2020/03/03/%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%AF%B9YouTube%E4%BD%8E%E5%BB%B6%E8%BF%9F%E7%9A%84%E7%BC%93%E5%86%B2%E4%BB%A5%E6%96%B9%E4%BE%BF%E8%BD%AC%E6%92%AD>  
 搭建自己的RTMP+HLS直播服务器：  
 <https://candinya.com/posts/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84RTMP-HLS%E7%9B%B4%E6%92%AD%E6%9C%8D%E5%8A%A1%E5%99%A8/>  

@@ -1,7 +1,8 @@
 # 转播新方案-自建直播服务器
 # 前言：
+本文现已在b站专栏发布：[cv5012779](https://www.bilibili.com/read/cv5012779)
 我是Noripro转播组里一位~~不会整活~~的转播man，最近实验了一种新型转播方式，效果不错，遂与各位分享。  
-犬山的直播设置是Ultra Low Latency，只有2-3秒的延迟，也就是只有2-3秒的缓冲时间，而且并不能在直播时实时回放，这就对转播man的网络质量有了极高的要求。这个月组内的转播man各种转圈，更加神必的是，连在日本的朋友也会卡顿，于是我从另一方向思考，能否通过增加缓冲时间(Buffer)保证直播的稳定性。  
+犬山的直播设置是Ultra Low Latency，只有2-3秒的延迟，也就是只有2-3秒的缓冲时间，而且并不能在直播时实时回放，这就对转播man的网络质量有了极高的要求。这个月组内的转播man各种转圈，更加神必的是，连在日本的朋友也会卡顿，于是我从另一方向思考，能否**通过增加缓冲时间(Buffer)保证直播的稳定性**。  
 ![断流图2](https://github.com/AceDroidX/AceDroidX.github.io/raw/master/blog/img/12b3f9c4d2c3b596.png)  
 （心 电 图）  
 ![断流图1](https://github.com/AceDroidX/AceDroidX.github.io/raw/master/blog/img/36bae2d3ac28e0b4.png)  
@@ -165,18 +166,15 @@ NGINX-RTMP实现HLS直播：
 `streamlink --hls-live-edge 1 "https://www.youtube.com/watch?v=${ID}" "$FORMAT" -O | ffmpeg -re -i pipe:0 -c copy -f flv rtmp://localhost/flv/${streamname}`  
 输出视频流：`https://flv.example.com/?app=flv&stream=${streamname}`
 #### hls模式  
-`streamlink --hls-live-edge 1 "https://www.youtube.com/watch?v=${ID}" "$FORMAT" -O | ffmpeg -re -i pipe:0 -c copy -f flv rtmp://localhost/hls/${streamname}` 
-输出视频流：`https://hls.example.com/${streamname}/index.m3u8`
-
+`streamlink --hls-live-edge 1 "https://www.youtube.com/watch?v=${ID}" "$FORMAT" -O | ffmpeg -re -i pipe:0 -c copy -f flv rtmp://localhost/hls/${streamname}`  
+输出视频流：`https://hls.example.com/${streamname}/index.m3u8`  
 之后你就可以用VLC插件在OBS里播放啦，然而我在使用VLC时总会遇到些奇奇怪怪的问题，于是用vuejs+dplayer做了个web页面
+
 #### http-flv模式
 `http://acedroidx.github.io/live?url=${baseurl}&stream=${streamname}`  
-以上面的视频流为例，此处的${baseurl}应为https://flv.example.com/
-
+以上面的视频流为例，此处的${baseurl}应为https://flv.example.com/  
 #### hls模式
-`http://acedroidx.github.io/live?url=${url}`
-
-
+`http://acedroidx.github.io/live?url=${url}`  
 在obs内新建浏览器源，填入以上链接即可  
 另外笔者仿造b站做了个自动追帧的功能，url中加入ratelimit参数即可在延迟超过ratelimit+1时以1.2倍速播放，直至延迟小于ratelimit  
 前端源码：`https://github.com/AceDroidX/AceDroidX.github.io/blob/master/live.html`

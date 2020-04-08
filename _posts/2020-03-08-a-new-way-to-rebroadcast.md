@@ -14,7 +14,7 @@
 # 简介：
 大致上用一张图来解释  
 ![原理图1](https://github.com/AceDroidX/AceDroidX.github.io/raw/master/blog/img/9Y4EC3GEELD8V1HLC0.png)  
-在转播源和转播服务器(转播man的电脑)之间设置一个RTMP服务器，使其输出TLS加密的HTTP-FLV或HLS直播流，同时在前端浏览或服务器输出直播流时自定义缓冲时间。
+在转播源和转播服务器(转播man的电脑)之间设置一个RTMP服务器，使其输出**TLS加密**的HTTP-FLV或HLS直播流，同时在前端浏览或服务器输出直播流时**自定义缓冲时间**。
 
 # 特性：
 1. 自建buffer，保障缓冲速度和稳定性
@@ -139,7 +139,8 @@ http {
 
 #### 其他参考文章：  
 同是Noripro转播组组员@A1ex_inamin 写的在LNMP环境下的配置：  
-<https://a1ex.pw/2020/03/03/%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%AF%B9YouTube%E4%BD%8E%E5%BB%B6%E8%BF%9F%E7%9A%84%E7%BC%93%E5%86%B2%E4%BB%A5%E6%96%B9%E4%BE%BF%E8%BD%AC%E6%92%AD>  
+<https://a1ex.pw/2020/03/03/A-method-to-improve-stability-of-ULL-rebroadcasting>  
+<https://www.bilibili.com/read/cv5040459>  
 搭建自己的RTMP+HLS直播服务器：  
 <https://candinya.com/posts/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84RTMP-HLS%E7%9B%B4%E6%92%AD%E6%9C%8D%E5%8A%A1%E5%99%A8/>  
 支持HTTP-FLV方式直播的开源模块nginx-http-flv-module：  

@@ -3,7 +3,7 @@
 这是一个原本10月就该发的视频
 
 特别感谢otomad.wiki的教程指路  
-封面背景：
+封面背景：  
 https://www.ea.com/en-au/games/apex-legends/media
 # 借物表/相关技术：
 ## 音频(FL Studio & iZotope & Melodyne & AU)：
@@ -49,7 +49,7 @@ https://ambientcg.com/view?id=Rope002
 https://space.bilibili.com/39373763/favlist?fid=1351561363  
 部分素材通过弹幕关键词筛选获得  
 ### Apex解包：
-Legion - The Apex Legends Asset Extractor
+Legion - The Apex Legends Asset Extractor  
 https://wiki.modme.co/wiki/apps/Legion.html
 ## 其他参考：
 av757666968 av4635778 av376932341  

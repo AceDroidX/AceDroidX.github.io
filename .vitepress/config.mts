@@ -8,15 +8,21 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Blogs', link: '/blogs' }
+      { text: 'Blogs', link: '/notes' }
     ],
 
     sidebar: [
       {
-        text: 'Examples',
+        text: '项目记录',
         items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
+          { text: '华为笔记本充电控制逆向过程记录', link: 'https://blog.acedroidx.top/HuaweiBatteryControl/' },
+        ]
+      },
+      {
+        text: '历史存档',
+        items: [
+          { text: '【七海/MAD】🦈鲨反射🦈-借物表/相关技术', link: '/notes/2022-01-19-shark-reflection' },
+          { text: 'vtuber转播新方案-自建直播服务器', link: '/notes/2020-03-08-a-new-way-to-rebroadcast' }
         ]
       }
     ],

@@ -5,11 +5,11 @@ layout: home
 hero:
   name: "Hi👋I'm AceDroidX"
   text: ""
-  tagline: 博客正在迁移中 请稍后再试
+  tagline: 
   actions:
     - theme: brand
       text: 所思所想
-      link: /blogs
+      link: /notes
     - theme: alt
       text: 开源项目
       link: https://github.com/AceDroidX

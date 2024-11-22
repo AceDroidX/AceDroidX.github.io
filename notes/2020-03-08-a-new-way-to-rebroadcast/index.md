@@ -3,17 +3,17 @@
 本文现已在b站专栏发布：[cv5012779](https://www.bilibili.com/read/cv5012779)  
 我是Noripro转播组里一位~~不会整活~~的转播man，最近实验了一种新型转播方式，效果不错，遂与各位分享。  
 犬山的直播设置是Ultra Low Latency，只有2-3秒的延迟，也就是只有2-3秒的缓冲时间，而且并不能在直播时实时回放，这就对转播man的网络质量有了极高的要求。这个月组内的转播man各种转圈，更加神必的是，连在日本的朋友也会卡顿，于是我从另一方向思考，能否**通过增加缓冲时间(Buffer)保证直播的稳定性**。  
-![断流图2](https://github.com/AceDroidX/AceDroidX.github.io/raw/master/blog/img/12b3f9c4d2c3b596.png)  
+![断流图2](./12b3f9c4d2c3b596.png)  
 （心 电 图）  
-![断流图1](https://github.com/AceDroidX/AceDroidX.github.io/raw/master/blog/img/36bae2d3ac28e0b4.png)  
+![断流图1](./36bae2d3ac28e0b4.png)  
 （心 肺 停 止）  
-![组内黑屁](https://github.com/AceDroidX/AceDroidX.github.io/raw/master/blog/img/Screenshot_2020-03-06-20-38-34-149_com.tencent.mo.png)  
+![组内黑屁](./Screenshot_2020-03-06-20-38-34-149_com.tencent.mo.png)  
 （组内黑屁）  
 不同方案有不同的好处，本方案也是为各位转播man提供一个新思路而已。
 
 # 简介：
 大致上用一张图来解释  
-![原理图1](https://github.com/AceDroidX/AceDroidX.github.io/raw/master/blog/img/9Y4EC3GEELD8V1HLC0.png)  
+![原理图1](./9Y4EC3GEELD8V1HLC0.png)  
 在转播源和转播服务器(转播man的电脑)之间设置一个RTMP服务器，使其输出**TLS加密**的HTTP-FLV或HLS直播流，同时在前端浏览或服务器输出直播流时**自定义缓冲时间**。
 
 # 特性：
@@ -34,7 +34,7 @@
 # 配置：
 **警告：以下可能只适合于笔者的应用环境，请不要完全参考此部分，因此描述较为粗略，实际操作时请多多查阅相关资料**  
 软件上的原理也用一张图表示：
-![原理图2](https://github.com/AceDroidX/AceDroidX.github.io/raw/master/blog/img/EDYFPWK2M9I896QXSL.png)  
+![原理图2](./EDYFPWK2M9I896QXSL.png)  
 笔者在nginx外面套一层Caddy是为了方便配置https(~~就是因为懒~~)  
 ## 安装软件：  
 系统环境：Ubuntu 18.04  
@@ -182,17 +182,17 @@ NGINX-RTMP实现HLS直播：
 # 实测
 本方案从2月13日开始实测（就是当天白雪的特殊推流），经过快一个月的时间，效果不错，~~比直接转播不知道高到哪里去了~~（~~虽然也有一次被Google当作机器人然后玩脱~~）  
 测试服务器位于Los Angeles(CN2GIA)
-![img1](https://github.com/AceDroidX/AceDroidX.github.io/raw/master/blog/img/2020-02-15.png)  
-![img2](https://github.com/AceDroidX/AceDroidX.github.io/raw/master/blog/img/2020-03-02(6).png)  
-![img3](https://github.com/AceDroidX/AceDroidX.github.io/raw/master/blog/img/2020-03-06(3).png)  
+![img1](./2020-02-15.png)  
+![img2](./2020-03-02(6).png)  
+![img3](./2020-03-06(3).png)  
 
 相对来说笔者更推荐http-flv模式  
 由于http-flv模式是真正的实时流，影响延迟的只在streamlink和前端浏览上，因此视频只比油管慢6s左右  
-![flv](https://github.com/AceDroidX/AceDroidX.github.io/raw/master/blog/img/2020-03-06(2).png)  
+![flv](./2020-03-06(2).png)  
 （甚至可以做到4s延迟）  
 
 hls模式本质是轮询ts文件，如果视频分片设的很小，将会出现建立连接时间长的情况，有时候1s的分片要1.2s下完：  
-![hls](https://github.com/AceDroidX/AceDroidX.github.io/raw/master/blog/img/3efc1c62-41fd-46a2-93a5-a5244917691c.png)  
+![hls](./3efc1c62-41fd-46a2-93a5-a5244917691c.png)  
 
 可能有人会问：为啥不直接用streamlink加--hls-live-edge参数，搞个RTMP服务器是干啥用的？
 
@@ -202,6 +202,6 @@ hls模式本质是轮询ts文件，如果视频分片设的很小，将会出现
 
 文章难免有疏漏之处，有错误和其它问题欢迎讨论  
 最后打个广告：
-![img4](https://github.com/AceDroidX/AceDroidX.github.io/raw/master/blog/img/1fe4b31f-3175-4e1e-9386-73c555ab72ad.png)  
+![img4](./1fe4b31f-3175-4e1e-9386-73c555ab72ad.png)  
 
 本作品采用 [知识共享署名-相同方式共享 4.0 国际许可协议](http://creativecommons.org/licenses/by-sa/4.0/) 进行许可。

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from "vitepress";
+import { nextTick } from "vue";
 const router = useRouter();
 const cards = [
   {
@@ -21,8 +22,9 @@ const cards = [
     link: "/notes/2020-03-08-a-new-way-to-rebroadcast",
   },
 ];
-function onClick(link: string) {
+async function onClick(link: string) {
   if (link.startsWith("http")) {
+    await nextTick();
     window.open(link, "_blank");
   } else {
     router.go(link);
@@ -31,7 +33,7 @@ function onClick(link: string) {
 </script>
 
 <template>
-  <div class="flex flex-col gap-4 p-8 md:mx-auto md:w-[650px]">
+  <div class="flex flex-col gap-6 p-8 md:mx-auto md:w-[650px]">
     <h1 class="text-4xl font-bold">✨ 近期更新</h1>
     <a
       v-for="card in cards"
@@ -39,7 +41,7 @@ function onClick(link: string) {
       @click.prevent="onClick(card.link)"
     >
       <div
-        class="group flex rounded-xl border p-8 transition-all hover:border-green-500 hover:transition-all"
+        class="group flex rounded-xl border border-gray-200 bg-gray-50 p-8 transition-all hover:border-green-500 hover:transition-all dark:border-gray-800 dark:bg-gray-800"
       >
         <div class="flex w-full flex-col gap-4">
           <div class="flex items-center justify-between">

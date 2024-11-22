@@ -35,39 +35,35 @@ async function onClick(link: string) {
 <template>
   <div class="flex flex-col gap-6 p-8 md:mx-auto md:w-[650px]">
     <h1 class="text-4xl font-bold">✨ 近期更新</h1>
-    <a
+    <div
       v-for="card in cards"
-      :href="card.link"
-      @click.prevent="onClick(card.link)"
+      @click="onClick(card.link)"
+      class="group flex rounded-xl border border-gray-200 bg-gray-50 p-8 transition-all hover:border-green-500 hover:transition-all dark:border-gray-800 dark:bg-gray-800"
     >
-      <div
-        class="group flex rounded-xl border border-gray-200 bg-gray-50 p-8 transition-all hover:border-green-500 hover:transition-all dark:border-gray-800 dark:bg-gray-800"
-      >
-        <div class="flex w-full flex-col gap-4">
-          <div class="flex items-center justify-between">
-            <h2 class="text-xl font-bold">{{ card.title }}</h2>
-            <div>{{ card.time }}</div>
-          </div>
-          <div class="flex items-center justify-between">
-            <p class="text-gray-800 dark:text-gray-100">
-              {{ card.description }}
-            </p>
-            <svg
-              width="24"
-              height="24"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              class="fill-gray-800 transition-all hover:transition-all group-hover:fill-green-500 dark:fill-gray-100"
-              fill="currentColor"
-            >
-              <title>arrow-right</title>
-              <path
-                d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"
-              />
-            </svg>
-          </div>
+      <div class="flex w-full flex-col gap-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xl font-bold">{{ card.title }}</h2>
+          <div>{{ card.time }}</div>
+        </div>
+        <div class="flex items-center justify-between">
+          <p class="text-gray-800 dark:text-gray-100">
+            {{ card.description }}
+          </p>
+          <svg
+            width="24"
+            height="24"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            class="fill-gray-800 transition-all hover:transition-all group-hover:fill-green-500 dark:fill-gray-100"
+            fill="currentColor"
+          >
+            <title>arrow-right</title>
+            <path
+              d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"
+            />
+          </svg>
         </div>
       </div>
-    </a>
+    </div>
   </div>
 </template>

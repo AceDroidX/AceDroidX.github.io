@@ -52,7 +52,7 @@ async function onClick(link: string) {
           <div>{{ card.time }}</div>
         </div>
         <div class="flex items-center justify-between">
-          <p class="text-gray-800 dark:text-gray-100">
+          <p class="text-gray-500 dark:text-gray-400">
             {{ card.description }}
           </p>
           <svg
@@ -60,7 +60,7 @@ async function onClick(link: string) {
             height="24"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            class="fill-gray-800 transition-all hover:transition-all group-hover:fill-green-500 dark:fill-gray-100"
+            class="fill-gray-800 transition-all group-hover:fill-green-500 hover:transition-all dark:fill-gray-100"
             fill="currentColor"
           >
             <title>arrow-right</title>

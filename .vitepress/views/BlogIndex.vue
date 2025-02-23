@@ -4,6 +4,12 @@ import { nextTick } from "vue";
 const router = useRouter();
 const cards = [
   {
+    title: "在Vue.js中手动显式指定子组件的泛型",
+    description: "",
+    time: "2025-02-23",
+    link: "/notes/2025-02-23-specify-generics-child-vue",
+  },
+  {
     title: "华为笔记本充电控制逆向过程记录",
     description: "摆脱花里胡哨的华为电脑管家",
     time: "2023-06-03",

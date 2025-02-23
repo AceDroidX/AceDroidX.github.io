@@ -13,6 +13,12 @@ export default defineConfig({
 
     sidebar: [
       {
+        text: '前端技术',
+        items: [
+          { text: '在Vue.js中手动显式指定子组件的泛型', link: '/notes/2025-02-23-specify-generics-child-vue' },
+        ]
+      },
+      {
         text: '项目记录',
         items: [
           { text: '华为笔记本充电控制逆向过程记录', link: 'https://blog.acedroidx.top/HuaweiBatteryControl/' },
